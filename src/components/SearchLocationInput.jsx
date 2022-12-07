@@ -26,7 +26,7 @@ const SearchLocationInput = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_API_KEY}&q=${debounceValue}`
+        `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_API_KEY}&q=${debounceValue}`
       );
       setData(response.data);
     } catch (error) {}
