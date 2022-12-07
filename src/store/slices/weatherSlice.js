@@ -14,7 +14,7 @@ export const getCurrentWeather = createAsyncThunk(
   async (cityKey) => {
     return await axios
       .get(
-        `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${process.env.REACT_APP_API_KEY}`
+        `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${process.env.REACT_APP_API_KEY}`
       )
       .then((res) => res.data.DailyForecasts);
   }
