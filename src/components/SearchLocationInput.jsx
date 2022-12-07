@@ -58,30 +58,40 @@ const SearchLocationInput = () => {
           type='text'
           lang='en'
         />
+        {data && searchQueryValue && (
+          <ResultContainer>
+            {data.length ? (
+              data?.map((location) => {
+                return (
+                  <Result
+                    key={location.Key}
+                    onClick={() =>
+                      onClickHandler(location.Key, location.LocalizedName)
+                    }
+                  >
+                    {location.LocalizedName}
+                  </Result>
+                );
+              })
+            ) : (
+              <LocationNotFoundContainer>
+                <LocationNotFound>
+                  Location with the name "{debounceValue}" was not found.
+                </LocationNotFound>
+              </LocationNotFoundContainer>
+            )}
+          </ResultContainer>
+        )}
       </InputContainer>
-      {data && searchQueryValue && (
-        <ResultContainer>
-          {data?.map((location) => {
-            return (
-              <Result
-                key={location.Key}
-                onClick={() =>
-                  onClickHandler(location.Key, location.LocalizedName)
-                }
-              >
-                {location.LocalizedName}
-              </Result>
-            );
-          })}
-        </ResultContainer>
-      )}
     </Wrapper>
   );
 };
 
 export default SearchLocationInput;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 const InputContainer = styled.div`
   position: relative;
@@ -106,11 +116,16 @@ const Input = styled.input`
 `;
 
 const ResultContainer = styled.div`
-  height: 15vh;
+  position: absolute;
+  height: 20vh;
   background-color: ${(props) => props.theme.inputColor};
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
+  top: 50px;
   margin-top: 0.3rem;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 0.375rem;
+
   overflow: hidden;
   overflow-y: scroll;
   z-index: 2;
@@ -124,8 +139,9 @@ const ResultContainer = styled.div`
 `;
 
 const Result = styled.p`
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   margin-left: 10px;
+  padding: 5px;
   cursor: pointer;
   font-size: 15px;
   display: flex;
@@ -135,3 +151,11 @@ const Result = styled.p`
     background-color: rgb(59, 130, 246, 0.1);
   }
 `;
+
+const LocationNotFoundContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+const LocationNotFound = styled.p``;
