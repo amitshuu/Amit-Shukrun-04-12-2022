@@ -43,11 +43,13 @@ const WeatherDetailsHeader = ({ WeatherIcon, WeatherDegree }) => {
     <Wrapper>
       <CityDetails>
         <CityImage
-          src={`https://developer.accuweather.com/sites/default/files/${iconFunc}-s.png`}
+          src={`https://developer.accuweather.com/sites/default/files/${
+            iconFunc ?? '01'
+          }-s.png`}
         />
         <CityInfoContainer>
           <CityName>{currentLocationName}</CityName>
-          <CityDegrees>{WeatherDegree}</CityDegrees>
+          <CityDegrees>{WeatherDegree ?? '20'}</CityDegrees>
         </CityInfoContainer>
       </CityDetails>
       <FavoriteButtonContainer>
